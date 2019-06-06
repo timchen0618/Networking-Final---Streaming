@@ -38,7 +38,7 @@ require('./app/routes.js')(app, streams);
 //var server = app.listen(app.get('port'), function(){
 //  console.log('Express server listening on port ' + app.get('port'));
 //});
-var server = app.listen(app.get('port'), "10.131.185.68" );
+var server = app.listen(app.get('port'), "192.168.1.179" );
 var io = require('socket.io').listen(server);
 /**
  * Socket.io event handling

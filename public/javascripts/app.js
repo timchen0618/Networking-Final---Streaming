@@ -142,7 +142,7 @@
 				.then(function(result) {
                     //localStream.link = $window.location.host + '/' + client.getId();
                     //console.log($window.location.host);
-                    localStream.link = "10.131.185.68:3000" + '/'+ client.getId();
+                    localStream.link = "192.168.1.179:3000" + '/'+ client.getId();
 					client.send('readyToStream', { name: localStream.name });
 				})
 				.catch(function(err) {

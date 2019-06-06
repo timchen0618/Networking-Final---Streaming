@@ -37,7 +37,7 @@ function trace(text) {
   }
 }
 
-if (false) {
+if (navigator.mozGetUserMedia) {
   console.log('This appears to be Firefox');
 
   webrtcDetectedBrowser = 'firefox';
@@ -67,11 +67,9 @@ if (false) {
 
   // getUserMedia shim (only difference is the prefix).
   // Code from Adam Barth.
-//    getUserMedia = navigator.mozGetUserMedia.bind(navigator);
+    getUserMedia = navigator.mozGetUserMedia.bind(navigator);
     //getUserMedia = navigator.mediaDevices.getUserMedia.bind(navigator);
-    //navigator.getUserMedia = getUserMedia;
-    // = navigator.mediaDevices.getUserMedia(navigator);
-
+  navigator.getUserMedia = getUserMedia;
 
   // Shim for MediaStreamTrack.getSources.
   MediaStreamTrack.getSources = function(successCb) {
@@ -144,7 +142,7 @@ if (false) {
     to.mozSrcObject = from.mozSrcObject;
   };
 
-} else if (true) {
+} else if (navigator.webkitGetUserMedia) {
   console.log('This appears to be Chrome');
 
   webrtcDetectedBrowser = 'chrome';
@@ -193,8 +191,8 @@ if (false) {
 
   // Get UserMedia (only difference is the prefix).
   // Code from Adam Barth.
-  // getUserMedia = navigator.webkitGetUserMedia.bind(navigator);
-  // navigator.getUserMedia = getUserMedia;
+  getUserMedia = navigator.webkitGetUserMedia.bind(navigator);
+  navigator.getUserMedia = getUserMedia;
 
   // Attach a media stream to an element.
   attachMediaStream = function(element, stream) {
@@ -219,21 +217,20 @@ if (false) {
 
 // Returns the result of getUserMedia as a Promise.
 function requestUserMedia(constraints) {
-  return navigator.mediaDevices.getUserMedia(constraints);
-  // return new Promise(function(resolve, reject) {
-  //   var onSuccess = function(stream) {
-  //     resolve(stream);
-  //   };
-  //   var onError = function(error) {
-  //     reject(error);
-  //   };
+  return new Promise(function(resolve, reject) {
+    var onSuccess = function(stream) {
+      resolve(stream);
+    };
+    var onError = function(error) {
+      reject(error);
+    };
 
-  //   try {
-  //       getUserMedia(constraints, onSuccess, onError);
-  //   } catch (e) {
-  //    reject(e);
-  //   }
-  // });
+    try {
+      getUserMedia(constraints, onSuccess, onError);
+    } catch (e) {
+      reject(e);
+    }
+  });
 }
 
 if (typeof module !== 'undefined') {
