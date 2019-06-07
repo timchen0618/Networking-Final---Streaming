@@ -11,7 +11,14 @@ var favicon = require('serve-favicon')
 ,	bodyParser = require('body-parser')
 ,	errorHandler = require('errorhandler');
 
+var https = require('https');
+var fs = require('fs');
+
 var app = express();
+var server = https.createServer({
+  key: fs.readFileSync('server.key'),
+  cert: fs.readFileSync('server.cert')
+}, app)
 
 // all environments
 app.set('port', process.env.PORT || 3000);
@@ -38,7 +45,8 @@ require('./app/routes.js')(app, streams);
 //var server = app.listen(app.get('port'), function(){
 //  console.log('Express server listening on port ' + app.get('port'));
 //});
-var server = app.listen(app.get('port'), "192.168.1.179" );
+// var server = app.listen(app.get('port'), "127.0.0.1" );
+server.listen(app.get('port'), "192.168.1.31" );
 var io = require('socket.io').listen(server);
 /**
  * Socket.io event handling
