@@ -139,7 +139,9 @@
 		});
 
 		localStream.toggleCam = function(){
+			var server_chat = document.getElementById('server_chat_wrap');
 			if(localStream.cameraIsOn){
+				server_chat.style['display'] = "none";
 				camera.stop()
 				.then(function(result){
 					client.send('leave');
@@ -149,6 +151,7 @@
 					console.log(err);
 				});
 			} else {
+				server_chat.style['display'] = "inline-block";
 				camera.start()
 				.then(function(result) {
                     //localStream.link = $window.location.host + '/' + client.getId();
