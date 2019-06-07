@@ -4,7 +4,7 @@
   "author": "Pierre Chabardes <pierre@chabardes.net>",
   "description": "a webRTC live streaming server",
   "scripts": {
-    "start": "node app.js",
+    "start": "nodemon ./app.js",
     "stop": "forever stopall"
   },
   "repository": {
@@ -22,6 +22,7 @@
     "method-override": "^2.3.2",
     "morgan": "^1.5.2",
     "multer": "^0.1.8",
+    "nodemon": "^1.19.1",
     "serve-favicon": "^2.2.0",
     "socket.io": "1.0"
   }
