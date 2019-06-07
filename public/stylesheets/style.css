@@ -40,6 +40,10 @@ li {
     padding: 5px 5px 5px 5px;
 }
 
+::placeholder {
+  color: gray;
+}
+
 li:hover {
   cursor: pointer;
   border: 2px solid rgb(54, 161, 211);
@@ -116,6 +120,7 @@ li:active {
 
 
 .chat_wrap{
+  display: none;
   margin-left: 20px;
   width:300px;
   height:400px;
@@ -125,13 +130,27 @@ li:active {
   border-top: 2px solid rgb(243, 165, 243);
   box-shadow: 5px 5px 3px #999999;
   border-bottom-right-radius: 15px;
-  border-radius:25px;}
-
-.chat_show{
-  height:300px;
+  border-radius:25px;
 }
 
-.test{
+.chat_show{
+  height:320px;
+  text-align: left;
+  overflow: auto;
+}
+
+.input_sub{
+  width: 298px;
+  height: 78px;
+  border-bottom-right-radius: 15px;
+  border-radius:0px 0px 25px 25px;
+  background: linear-gradient(90deg, rgba(242, 164, 245, 1)25%, rgba(255, 255, 255, 0)100%); 
+  background: -moz-linear-gradient(90deg, rgba(242, 164, 245, 1)25%, rgba(255, 255, 255, 0)100%); 
+  background: -webkit-linear-gradient(90deg, rgba(242, 164, 245, 1)25%, rgba(255, 255, 255, 0)100%); 
+  background: -o-linear-gradient(90deg, rgba(242, 164, 245, 1)25%, rgba(255, 255, 255, 0)100%); 
+}
+
+.video_watch{
   border-bottom:3px solid rgb(243, 165, 243);
   border-right: 3px solid rgb(243, 165, 243);
   border-left: 2px solid rgb(243, 165, 243);
