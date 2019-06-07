@@ -24,7 +24,13 @@ var PeerManager = (function () {
   socket.on('id', function(id) {
     localId = id;
   });
-
+  socket.on('chat', function(options){
+    console.log('fuck');
+    var p = document.createElement('p'); 
+    p.innerHTML = options.userid + ': ' + options.text;
+    chats = document.getElementById('chatbox');
+    chatbox.appendChild(p); 
+  })
   function addPeer(remoteId) {
     var peer = new Peer(config.peerConnectionConfig, config.peerConnectionConstraints);
     peer.pc.onicecandidate = function(event) {
@@ -39,6 +45,7 @@ var PeerManager = (function () {
     peer.pc.onaddstream = function(event) {
       attachMediaStream(peer.remoteVideoEl, event.stream);
       remoteVideosContainer.appendChild(peer.remoteVideoEl);
+      chat.style['display'] = "inline-block";
       // var chat_wrap = document.createElement("DIV");
       // chat_wrap.setAttribute('id','cin');
       // var chat_input = document.createElement("INPUT");
@@ -56,8 +63,7 @@ var PeerManager = (function () {
     peer.pc.onremovestream = function(event) {
       peer.remoteVideoEl.src = '';
       remoteVideosContainer.removeChild(peer.remoteVideoEl);
-      var chat_input = document.getElementById('cin')
-      chat.removeChild(chat_input)
+      chat.style['display'] = "none";
     };
     peer.pc.oniceconnectionstatechange = function(event) {
       switch(
@@ -186,7 +192,7 @@ var PeerManager = (function () {
 var Peer = function (pcConfig, pcConstraints) {
   this.pc = new RTCPeerConnection(pcConfig, pcConstraints);
   this.remoteVideoEl = document.createElement('video');
-  this.remoteVideoEl.classList.add("test");
+  this.remoteVideoEl.classList.add("video_watch");
   // this.remoteVideoEl.width = "600";
   // this.remoteVideoEl.height = "400";
   this.remoteVideoEl.controls = true;

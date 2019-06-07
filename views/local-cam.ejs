@@ -1,8 +1,8 @@
 <div class="localStream" ng-controller="LocalStreamController as localStream">
 	<h3>Streaming</h3>
 	<div class="input-field input_name">
-		<input id="last_name" type="text" ng-model="localStream.name">
-		<label for="last_name">Username:</label>
+		<input id="name" type="text" ng-model="localStream.name">
+		<label for="name">Username:</label>
 	</div>
 	<video id="localVideo" muted="muted" autoplay="true"></video>
 	<li ng-click="localStream.toggleCam()">

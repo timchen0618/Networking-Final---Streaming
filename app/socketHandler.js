@@ -27,7 +27,19 @@ module.exports = function(io, streams) {
     client.on('update', function(options) {
       streams.update(client.id, options.name);
     });
-
+    client.on('sendchat', function(options){
+      console.log(options.text);
+      io.emit('chat', {
+        origin:'SERVER', 
+        text: options.text,
+        userid: options.id
+        });
+      console.log(options.id);
+      // var p = document.createElement('p'); 
+      // p.innerHTML = client.id + ': ' + options.text;
+      // chats = document.getElementById('chatbox');
+      // chatbox.appendChild(p); 
+    });
     function leave() {
       console.log('-- ' + client.id + ' left --');
       streams.removeStream(client.id);
