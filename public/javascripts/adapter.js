@@ -67,7 +67,7 @@ if (navigator.mozGetUserMedia) {
 
   // getUserMedia shim (only difference is the prefix).
   // Code from Adam Barth.
-    getUserMedia = navigator.mozGetUserMedia.bind(navigator);
+  getUserMedia = navigator.mozGetUserMedia.bind(navigator);
     //getUserMedia = navigator.mediaDevices.getUserMedia.bind(navigator);
   navigator.getUserMedia = getUserMedia;
 
