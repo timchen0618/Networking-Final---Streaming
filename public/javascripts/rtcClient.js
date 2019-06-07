@@ -28,8 +28,14 @@ var PeerManager = (function () {
     console.log('fuck');
     var p = document.createElement('p'); 
     p.innerHTML = options.userid + ': ' + options.text;
+    p.classList.add('messages')
+    var p2 = document.createElement('p'); 
+    p2.innerHTML = options.userid + ': ' + options.text;
+    p2.classList.add('messages')
     chats = document.getElementById('chatbox');
-    chatbox.appendChild(p); 
+    chats2 = document.getElementById('server_chat')
+    chatbox.appendChild(p);
+    server_chat.appendChild(p2);
   })
   function addPeer(remoteId) {
     var peer = new Peer(config.peerConnectionConfig, config.peerConnectionConstraints);
