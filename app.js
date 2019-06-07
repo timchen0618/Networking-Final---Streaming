@@ -46,6 +46,7 @@ require('./app/routes.js')(app, streams);
 //  console.log('Express server listening on port ' + app.get('port'));
 //});
 // var server = app.listen(app.get('port'), "127.0.0.1" );
+
 server.listen(app.get('port'), "192.168.1.31" );
 var io = require('socket.io').listen(server);
 /**

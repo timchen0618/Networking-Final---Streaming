@@ -3,7 +3,7 @@
 	<table class="centered">
     	<thead>
     		<tr>
-        		<th>Stream</th><th>1-way</th><th>2-way</th>
+				<th>Stream</th><th>1-way</th><th>2-way</th>
    			</tr>
    		</thead>
     	<tbody>
@@ -14,11 +14,23 @@
     		</tr>
 		</tbody>
 	</table>
-	<div id="remoteVideosContainer"></div>
+	<div class="row watch_wrap">
+		<div class="col video_wrap" id="remoteVideosContainer"></div>
+		<div class="col chat_wrap">
+			<div id='chat'>
+				<div class="chat_show">
+
+				</div>
+				<input placeholder="test input" ng-model='rtc.input'>
+				<input type="submit" ng-click='rtc.send_text()'>
+			</div>
+		</div>
+	</div>
 	<div class="refresh">
 		<li ng-click="rtc.loadData()">
 			<a href>Refresh</a>
 		</li>
 	</div>
 
-<div class="remoteStreams">
+
+</div>
