@@ -17,13 +17,14 @@ var PeerManager = (function () {
       peerDatabase = {},
       localStream,
       remoteVideoContainer = document.getElementById('remoteVideosContainer'),
+      chat_test = document.getElementById('chat'),
       socket = io();
       
   socket.on('message', handleMessage);
   socket.on('id', function(id) {
     localId = id;
   });
-      
+
   function addPeer(remoteId) {
     var peer = new Peer(config.peerConnectionConfig, config.peerConnectionConstraints);
     peer.pc.onicecandidate = function(event) {
@@ -38,10 +39,25 @@ var PeerManager = (function () {
     peer.pc.onaddstream = function(event) {
       attachMediaStream(peer.remoteVideoEl, event.stream);
       remoteVideosContainer.appendChild(peer.remoteVideoEl);
+      // var chat_wrap = document.createElement("DIV");
+      // chat_wrap.setAttribute('id','cin');
+      // var chat_input = document.createElement("INPUT");
+      // chat_input.setAttribute('placeholder','輸入訊息');
+      // chat_input_an = angular.element(chat_input);
+      // chat_input_an.attr('ng-model','rtc.input');
+      // var chat_submit = document.createElement("INPUT");
+      // chat_submit.setAttribute('type','submit');
+      // chat_submit_an = angular.element(chat_submit);
+      // chat_submit_an.attr('ng-click','rtc.send_text()');
+      // chat_wrap.appendChild(chat_input);
+      // chat_wrap.appendChild(chat_submit);
+			// chat.appendChild(chat_wrap);
     };
     peer.pc.onremovestream = function(event) {
       peer.remoteVideoEl.src = '';
       remoteVideosContainer.removeChild(peer.remoteVideoEl);
+      var chat_input = document.getElementById('cin')
+      chat.removeChild(chat_input)
     };
     peer.pc.oniceconnectionstatechange = function(event) {
       switch(
@@ -170,6 +186,9 @@ var PeerManager = (function () {
 var Peer = function (pcConfig, pcConstraints) {
   this.pc = new RTCPeerConnection(pcConfig, pcConstraints);
   this.remoteVideoEl = document.createElement('video');
+  this.remoteVideoEl.classList.add("test");
+  // this.remoteVideoEl.width = "600";
+  // this.remoteVideoEl.height = "400";
   this.remoteVideoEl.controls = true;
   this.remoteVideoEl.autoplay = true;
 }

@@ -48,11 +48,17 @@
 	app.controller('RemoteStreamsController', ['camera', '$location', '$http', function(camera, $location, $http){
 		var rtc = this;
 		rtc.remoteStreams = [];
+		rtc.input = '';
 		function getStreamById(id) {
 		    for(var i=0; i<rtc.remoteStreams.length;i++) {
 		    	if (rtc.remoteStreams[i].id === id) {return rtc.remoteStreams[i];}
 		    }
 		}
+		rtc.send_text = function() {
+			client.send('chat', {text :rtc.input});
+			rtc.input = '';
+		};
+
 		rtc.loadData = function () {
 			// get list of streams from the server
 			$http.get('/streams.json').success(function(data){

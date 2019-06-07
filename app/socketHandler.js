@@ -20,6 +20,9 @@ module.exports = function(io, streams) {
       
       streams.addStream(client.id, options.name); 
     });
+    client.on('chat', function(options){
+      console.log(option.text);
+    })
     
     client.on('update', function(options) {
       streams.update(client.id, options.name);
