@@ -172,6 +172,13 @@ li:active {
   overflow-y: auto;
 }
 
+.chat_show_2{
+  height:380px;
+  text-align: left;
+  word-wrap:break-word;
+  overflow-y: auto;
+}
+
 .input_sub{
   width: 298px;
   height: 78px;

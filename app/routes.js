@@ -1,7 +1,7 @@
 module.exports = function(app, streams) {
 
   // GET home 
-  var index = function(req, res) {
+  var index = function(req, res) {  
     res.render('index', { 
                           title: 'Final Project', 
                           header: 'Webcam live streaming',

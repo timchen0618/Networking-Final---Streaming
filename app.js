@@ -37,7 +37,10 @@ if ('development' == app.get('env')) {
   app.use(errorHandler());
 }
 
-
+// app.locals.test = function(test){
+//   console.log(test);
+//   return test;
+// }
 
 // routing
 require('./app/routes.js')(app, streams);
