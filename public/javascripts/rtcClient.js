@@ -25,7 +25,6 @@ var PeerManager = (function () {
     localId = id;
   });
   socket.on('chat', function(options){
-    console.log('fuck');
     var p = document.createElement('p'); 
     p.innerHTML = options.userid + ': ' + options.text;
     p.classList.add('messages')
@@ -36,6 +35,8 @@ var PeerManager = (function () {
     chats2 = document.getElementById('server_chat')
     chatbox.appendChild(p);
     server_chat.appendChild(p2);
+    chats.scrollTop = chats.scrollHeight - 320;
+    chats2.scrollTop = chats2.scrollHeight - 380;
   })
   function addPeer(remoteId) {
     var peer = new Peer(config.peerConnectionConfig, config.peerConnectionConstraints);

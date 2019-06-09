@@ -55,9 +55,19 @@
 		    	if (rtc.remoteStreams[i].id === id) {return rtc.remoteStreams[i];}
 		    }
 		}
+
+		rtc.send_text_2 = function(event){
+			if (event.keyCode === 13 && rtc.input !== ''){
+				client.send('sendchat', {text :rtc.input, id: rtc.name});
+				rtc.input = '';
+			}
+		}
+
 		rtc.send_text = function() {
-			client.send('sendchat', {text :rtc.input, id: rtc.name});
-			rtc.input = '';
+			if(rtc.input !== ''){
+				client.send('sendchat', {text :rtc.input, id: rtc.name});
+				rtc.input = '';
+			}
 		};
 		// rtc.send_text = function() {
 		// 	client.send('chat', {text :rtc.input});
