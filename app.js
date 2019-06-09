@@ -25,7 +25,7 @@ app.set('port', process.env.PORT || 3000);
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 //app.set('ip', process.env.SERVER_IP || "127.0.0.1")
-app.use(favicon(__dirname + '/public/images/favicon.ico'));
+app.use(favicon(__dirname + '/public/images/icon.png'));
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -50,7 +50,7 @@ require('./app/routes.js')(app, streams);
 //});
 // var server = app.listen(app.get('port'), "127.0.0.1" );
 
-server.listen(app.get('port'), "192.168.1.31" );
+server.listen(app.get('port'), "192.168.1.178" );
 var io = require('socket.io').listen(server);
 /**
  * Socket.io event handling

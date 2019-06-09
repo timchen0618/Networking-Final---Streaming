@@ -1,6 +1,7 @@
 var PeerManager = (function () {
 
   var localId,
+      remoteid = "",
       config = {
         peerConnectionConfig: {
           iceServers: [
@@ -25,18 +26,21 @@ var PeerManager = (function () {
     localId = id;
   });
   socket.on('chat', function(options){
-    var p = document.createElement('p'); 
-    p.innerHTML = options.userid + ': ' + options.text;
-    p.classList.add('messages')
-    var p2 = document.createElement('p'); 
-    p2.innerHTML = options.userid + ': ' + options.text;
-    p2.classList.add('messages')
-    chats = document.getElementById('chatbox');
-    chats2 = document.getElementById('server_chat')
-    chatbox.appendChild(p);
-    server_chat.appendChild(p2);
-    chats.scrollTop = chats.scrollHeight - 320;
-    chats2.scrollTop = chats2.scrollHeight - 380;
+    if(remoteid === options.server || localId  === options.server){
+      var p = document.createElement('p'); 
+      p.innerHTML = options.userid + ': ' + options.text;
+      p.classList.add('messages')
+      var p2 = document.createElement('p'); 
+      p2.innerHTML = options.userid + ': ' + options.text;
+      p2.classList.add('messages')
+      chats = document.getElementById('chatbox');
+      chats2 = document.getElementById('server_chat')
+      chatbox.appendChild(p);
+      server_chat.appendChild(p2);
+      chats.scrollTop = chats.scrollHeight - 320;
+      chats2.scrollTop = chats2.scrollHeight - 380;
+    }
+    
   })
   function addPeer(remoteId) {
     var peer = new Peer(config.peerConnectionConfig, config.peerConnectionConstraints);
@@ -71,6 +75,15 @@ var PeerManager = (function () {
       peer.remoteVideoEl.src = '';
       remoteVideosContainer.removeChild(peer.remoteVideoEl);
       chat.style['display'] = "none";
+      var wrap = document.getElementById('chat_reload');
+      //var content = document.getElementById('chatbox')
+      chat_reload.removeChild(document.getElementById('chatbox'));
+      var content = document.createElement("DIV");
+      content.classList.add("chat_show");
+      content.setAttribute('id', "chatbox");
+      chat_reload.appendChild(content);
+
+
     };
     peer.pc.oniceconnectionstatechange = function(event) {
       switch(
@@ -158,7 +171,9 @@ var PeerManager = (function () {
     getId: function() {
       return localId;
     },
-    
+    getRemoteId: function() {
+      return remoteid;
+    },
     setLocalStream: function(stream) {
 
       // if local cam has been stopped, remove it from all outgoing streams.
@@ -183,6 +198,7 @@ var PeerManager = (function () {
     peerInit: function(remoteId) {
       peer = peerDatabase[remoteId] || addPeer(remoteId);
       send('init', remoteId, null);
+      remoteid = remoteId
     },
 
     peerRenegociate: function(remoteId) {

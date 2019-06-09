@@ -28,18 +28,18 @@
 	<div class="row watch_wrap">
 		<div class="col video_wrap" id="remoteVideosContainer"></div>
 		<div class="col chat_wrap" id='chat'>
-			<div>
+			<div id = 'chat_reload'>
 				<div class="chat_show" id='chatbox'>
 				</div>
-				<div class="row input_sub">
-					<div class="input-field col s8">
-						<input placeholder="input" ng-model='rtc.input' ng-keyup='rtc.send_text_2($event)'>
-					</div>
-					<div class="input-field col s3">
-						<button class="btn waves-effect waves-light" type="submit" ng-click='rtc.send_text()'>Send</button>
-					</div>
-					
+			</div>
+			<div class="row input_sub">
+				<div class="input-field col s8">
+					<input placeholder="input" ng-model='rtc.input' ng-keyup='rtc.send_text_2($event)'>
 				</div>
+				<div class="input-field col s3">
+					<button class="btn waves-effect waves-light" type="submit" ng-click='rtc.send_text()'>Send</button>
+				</div>
+				
 			</div>
 		</div>
 	</div>

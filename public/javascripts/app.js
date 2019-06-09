@@ -58,15 +58,17 @@
 
 		rtc.send_text_2 = function(event){
 			if (event.keyCode === 13 && rtc.input !== ''){
-				client.send('sendchat', {text :rtc.input, id: rtc.name});
+				client.send('sendchat', {text :rtc.input, id: rtc.name, serverid: client.getRemoteId()});
 				rtc.input = '';
 			}
 		}
 
 		rtc.send_text = function() {
 			if(rtc.input !== ''){
-				client.send('sendchat', {text :rtc.input, id: rtc.name});
-				rtc.input = '';
+				client.send('sendchat', {text :rtc.input, id: rtc.name, serverid: client.getRemoteId()});
+				rtc.input = "";
+				// console.log("getremoteid");
+				// console.log(client.getRemoteId());
 			}
 		};
 		// rtc.send_text = function() {
@@ -166,7 +168,7 @@
 				.then(function(result) {
                     //localStream.link = $window.location.host + '/' + client.getId();
                     //console.log($window.location.host);
-                    localStream.link = "192.168.1.31:3000" + '/'+ client.getId();
+                    localStream.link = "192.168.1.178:3000" + '/'+ client.getId();
 					client.send('readyToStream', { name: localStream.name });
 				})
 				.catch(function(err) {

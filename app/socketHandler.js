@@ -28,13 +28,12 @@ module.exports = function(io, streams) {
       streams.update(client.id, options.name);
     });
     client.on('sendchat', function(options){
-      console.log(options.text);
       io.emit('chat', {
         origin:'SERVER', 
         text: options.text,
-        userid: options.id
+        userid: options.id,
+        server: options.serverid
         });
-      console.log(options.id);
       // var p = document.createElement('p'); 
       // p.innerHTML = client.id + ': ' + options.text;
       // chats = document.getElementById('chatbox');
