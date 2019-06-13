@@ -27,18 +27,28 @@ var PeerManager = (function () {
   });
   socket.on('chat', function(options){
     if(remoteid === options.server || localId  === options.server){
-      var p = document.createElement('p'); 
-      p.innerHTML = options.userid + ': ' + options.text;
-      p.classList.add('messages')
-      var p2 = document.createElement('p'); 
-      p2.innerHTML = options.userid + ': ' + options.text;
-      p2.classList.add('messages')
-      chats = document.getElementById('chatbox');
-      chats2 = document.getElementById('server_chat')
-      chatbox.appendChild(p);
-      server_chat.appendChild(p2);
-      chats.scrollTop = chats.scrollHeight - 320;
-      chats2.scrollTop = chats2.scrollHeight - 380;
+      if(remoteid === options.server){
+        var p = document.createElement('p'); 
+        p.innerHTML = options.userid + ': ' + options.text;
+        p.classList.add('messages');
+        chats = document.getElementById('chatbox');
+        chatbox.appendChild(p);
+        chats.scrollTop = chats.scrollHeight - 320;
+      }    
+      else{
+        var p2 = document.createElement('p'); 
+        p2.innerHTML = options.userid + ': ' + options.text;
+        p2.classList.add('messages');
+        chats2 = document.getElementById('server_chat');
+        server_chat.appendChild(p2);
+        chats2.scrollTop = chats2.scrollHeight - 380;
+      }
+      
+      
+      
+      
+      
+      
     }
     
   })
